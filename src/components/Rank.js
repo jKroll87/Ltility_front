@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from './Button';
 
 class Rank extends Component {
     constructor(props) {
@@ -15,9 +16,7 @@ class Rank extends Component {
     }
 
     callApi = async () => {
-        await fetch('http://sogang.shop/rank', {
-            headers: { Accept: 'application/json' }
-        })
+        await fetch('http://sogang.shop/rank')
             .then((res) => {
                 return res.json();
             })
@@ -41,8 +40,6 @@ class Rank extends Component {
         let result = [];
         let summoners = this.state.responseRankList;
 
-        console.log(summoners);
-
         for (let summoner of summoners) {
             result.push(
                 <tr>
@@ -50,6 +47,7 @@ class Rank extends Component {
                     <td>{summoner.summonerName}</td>
                     <td>{summoner.tier}</td>
                     <td>{summoner.leaguePoints}</td>
+                    <td><Button></Button></td>
                 </tr>
             )
         }
@@ -59,14 +57,15 @@ class Rank extends Component {
     render() {
         return (
             <div class="layer">
-                <table class="table">
-                    <caption>RANK</caption>
+                <table class="styled-table">
+                    {/* <caption>RANK</caption> */}
                     <thead>
                         <tr>
                             <th>순위</th>
                             <th>소환사명</th>
                             <th>티어</th>
                             <th>LP</th>
+                            <th>즐겨찾기</th>
                         </tr>
                     </thead>
                     <tbody>
