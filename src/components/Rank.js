@@ -40,14 +40,14 @@ class Rank extends Component {
         let result = [];
         let summoners = this.state.responseRankList;
 
-        for (let summoner of summoners) {
+        for (let i in summoners) {
             result.push(
-                <tr>
-                    <td>{summoner.rank}</td>
-                    <td>{summoner.summonerName}</td>
-                    <td>{summoner.tier}</td>
-                    <td>{summoner.leaguePoints}</td>
-                    <td><Button summonerName={summoner.summonerName}></Button></td>
+                <tr key={`summoner_${i}`}>
+                    <td>{summoners[i].rank}</td>
+                    <td>{summoners[i].summonerName}</td>
+                    <td>{summoners[i].tier}</td>
+                    <td>{summoners[i].leaguePoints}</td>
+                    <td><Button summonerName={summoners[i].summonerName}></Button></td>
                 </tr>
             )
         }
@@ -56,8 +56,8 @@ class Rank extends Component {
 
     render() {
         return (
-            <div class="layer">
-                <table class="styled-table">
+            <div className="layer">
+                <table className="styled-table">
                     {/* <caption>RANK</caption> */}
                     <thead>
                         <tr>

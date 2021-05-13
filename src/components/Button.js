@@ -26,7 +26,7 @@ class Button extends Component {
     render() {
         return(
             <button>
-                <img class="favorite" src="star1.png" alt="button" onClick={this.setFavorite}></img>
+                <img className="favorite" src="star1.png" alt="button" onClick={this.setFavorite}></img>
             </button>
         )
     }
