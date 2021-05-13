@@ -47,7 +47,7 @@ class Rank extends Component {
                     <td>{summoner.summonerName}</td>
                     <td>{summoner.tier}</td>
                     <td>{summoner.leaguePoints}</td>
-                    <td><Button></Button></td>
+                    <td><Button summonerName={summoner.summonerName}></Button></td>
                 </tr>
             )
         }

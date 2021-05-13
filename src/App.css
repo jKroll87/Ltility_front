@@ -1,10 +1,10 @@
-.layer {
+/* .layer {
   width: 1000px;
   margin: 0 auto;
-}
+} */
 .styled-table {
   border-collapse: collapse;
-  margin: 25px 0;
+  margin: 0 auto;
   font-size: 0.9em;
   font-family: sans-serif;
   min-width: 400px;
@@ -14,7 +14,6 @@
 .styled-table thead tr {
   background-color: #009879;
   color: #ffffff;
-  text-align: left;
 }
 .styled-table th,
 .styled-table td {
@@ -33,6 +32,16 @@
   font-weight: bold;
   color: #009879;
 } */
+
+button {
+  padding-top: 2px;
+  border: none;
+  background: none;
+}
+.favorite {
+  width: 20px;
+  height: 20px;
+}
 
 .App {
   text-align: center;
