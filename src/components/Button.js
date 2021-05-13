@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
 
 class Button extends Component {
-    static getDerivedStateFromProps(props, state) {
-        return {};
-    }
-    constructor(props) {
-        super(props);
+    pushFavorite = () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites'));
 
-        this.state = {
-            isSelected: 'checked',
+        if (favorites === null) {
+            favorites = [];
         }
-    }
-
-    setFavorite = () => {
-        let favorites = localStorage.getItem('favorites');
-        if (favorites !== null || favorites !== undefined)
-            favorites = favorites.split('|');
-
-        if (favorites.includes(this.props.summonerName) === false) {
-            favorites += '|' + this.props.summonerName;
-            localStorage.setItem('favorites', JSON.stringify(favorites));
+        if (favorites.includes(this.props.summonerName)) {
+            let deleteIndex = favorites.findIndex((element) => element === this.props.summonerName);
+            favorites.splice(deleteIndex, 1);
         }
+        else {
+            favorites.push(this.props.summonerName);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
     }
 
     render() {
         return(
             <button>
-                <img className="favorite" src="star1.png" alt="button" onClick={this.setFavorite}></img>
+                <img className="favorite" src="star1.png" alt="button" onClick={this.pushFavorite}></img>
             </button>
         )
     }
