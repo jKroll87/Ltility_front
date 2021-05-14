@@ -7,8 +7,9 @@ class Rank extends Component {
 
         this.state = {
             responseRankList: '',
-            rankList: ''
-        };
+            rankList: '',
+            favoritesRankList: ''
+        }
     }
 
     componentDidMount = () => {
@@ -73,6 +74,7 @@ class Rank extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                        {this.state.favoritesRankList}
                         {this.state.rankList}
                     </tbody>
                 </table>

@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
 
+const imagesPath = {
+    nostar: 'star1.png',
+    star: 'star2.png'
+};
+
 class Button extends Component {
-    pushFavorite = () => {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isSelected: true
+        }
+    }
+
+    click = () => {
+        this.setFavorite();
+        this.toggleImage();
+    }
+
+    setFavorite = () => {
         let favorites = JSON.parse(localStorage.getItem('favorites'));
 
         if (favorites === null) {
@@ -18,10 +36,17 @@ class Button extends Component {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }
 
+    toggleImage = () => {
+        this.setState(state => ({ isSelected: !state.isSelected }));
+    }
+
+    getImageName = () => this.state.isSelected ? 'nostar' : 'star'
+
     render() {
+        const imageName = this.getImageName();
         return(
             <button>
-                <img className="favorite" src="star1.png" alt="button" onClick={this.pushFavorite}></img>
+                <img className="favorite" src={imagesPath[imageName]} alt="button" onClick={this.click}></img>
             </button>
         )
     }
