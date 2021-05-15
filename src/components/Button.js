@@ -1,52 +1,63 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const imagesPath = {
-    nostar: 'star1.png',
-    star: 'star2.png'
+const imagePaths = {
+    unFavoriteStar: 'unfavoritestar.png',
+    favoriteStar: 'favoritestar.png'
 };
 
-class Button extends Component {
+class Button extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            isSelected: true
+            isSelected: this.props.isSelected
         }
     }
 
-    click = () => {
-        this.setFavorite();
-        this.toggleImage();
+    static getDerivedStateFromProps(props, state) {
+        if (props.isSelected !== state.isSelected) {
+            return {
+                isSelected: props.isSelected
+            };
+        }
+        return {};
     }
 
-    setFavorite = () => {
+    buttonClicked = () => {
+        if (this.state.isSelected) {
+            this.props.deleteFavorite(this.props.summonerName);
+        }
+        else {
+            this.props.addFavorite(this.props.summonerName);
+        }
+        this.toggleStarImage();
+        this.updateFavorites();
+    }
+
+    toggleStarImage = () => {
+        this.setState(state => ({ isSelected: !state.isSelected }));
+    }
+
+    getImageName = () => { return this.state.isSelected ? 'favoriteStar' : 'unFavoriteStar' }
+
+    updateFavorites = () => {
         let favorites = JSON.parse(localStorage.getItem('favorites'));
-
-        if (favorites === null) {
-            favorites = [];
-        }
-        if (favorites.includes(this.props.summonerName)) {
+        if (favorites?.includes(this.props.summonerName)) {
             let deleteIndex = favorites.findIndex((element) => element === this.props.summonerName);
             favorites.splice(deleteIndex, 1);
         }
         else {
+            if (favorites === null) favorites = [];
             favorites.push(this.props.summonerName);
         }
-
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }
 
-    toggleImage = () => {
-        this.setState(state => ({ isSelected: !state.isSelected }));
-    }
-
-    getImageName = () => this.state.isSelected ? 'nostar' : 'star'
-
     render() {
         const imageName = this.getImageName();
-        return(
-            <button>
-                <img className="favorite" src={imagesPath[imageName]} alt="button" onClick={this.click}></img>
+        return (
+            <button onClick={this.buttonClicked}>
+                <img className="favorite" src={imagePaths[imageName]} alt="button"></img>
             </button>
         )
     }
