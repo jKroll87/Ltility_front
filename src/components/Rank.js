@@ -47,7 +47,7 @@ class Rank extends React.Component {
     }
 
     callRankApi = async () => {
-        await fetch('http://sogang.shop/api/rank')
+        await fetch('http://api.sogang.shop/rank')
             .then((res) => {
                 return res.json();
             })
